@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h1>Track Your Spending!</h1>
+    <h4 id="holdon">Checking if logged in or not... please wait...</h4>
+    <h3 id="wrongSite" style="display: none">Please visit and login to <a href="https://www.swiggy.com/">Swiggy's</a> or
+        <a href="https://www.zomato.com/">Zomato's</a> website and after
+        logging-in open the extension.
+    </h3>
+    <h3 id="notLoggedin" style="display: none">Please login and open the extension.</h3>
+    <div id="load" style="display: none">
+        <div class="loader"></div>
+        <h4>Preparing dashboard...Usually Takes 15-20 seconds depending on orders.</h4>
+    </div>
+    </div>
+    <div id="active">
+        <h3 style="width: 90%;">You're Logged in!</h3>
+        <div class="card">
+            <h3>Total Orders Placed:</h3>
+            <span id="ztotal"></span>
+        </div>
+        <div class="card">
+            <h3>Total Amount Spent:</h3>
+            <span id="zspend"></span>
+        </div>
+        <div class="card" style="width: 90%;">
+            <h3>Restaurant Most Ordered from:</h3>
+            <span id="zres"></span>
+        </div>
+        <div class="card" style="width: 90%;">
+            <h3>Oldest Order:</h3>
+            <span id="zold"></span>
+        </div>
+        <div class="card" style="width: 90%;">
+            <h3>Highest Paid Order:</h3>
+            <span id="zhigh"></span>
+        </div>
+    </div>
+    <script src="swiggy.js" type="text/javascript"></script>
+    <script src="zomato.js" type="text/javascript"></script>
+    <script src="common.js" type="text/javascript"></script>
+</body>
+
+</html>

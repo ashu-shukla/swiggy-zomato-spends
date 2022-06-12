@@ -1,0 +1,16 @@
+{
+    "name": "Swiggy Zomato Spends",
+    "description": "Build an Extension!",
+    "version": "1.1",
+    "manifest_version": 3,
+    "background": {
+        "service_worker": "background.js"
+    },
+    "permissions": [
+        "activeTab",
+        "scripting"
+    ],
+    "action": {
+        "default_popup": "index.html"
+    }
+}

@@ -1,16 +1,16 @@
 {
-    "name": "Swiggy Zomato Spends",
-    "description": "Build an Extension!",
-    "version": "1.1",
     "manifest_version": 3,
-    "background": {
-        "service_worker": "background.js"
+    "name": "Swiggy Zomato Spends",
+    "description": "You know you want to know how much you spent on food!",
+    "version": "0.0.2",
+    "action": {
+        "default_popup": "index.html",
+        "default_icon": "/images/download.png"
+    },
+    "icons": {
+        "128": "/images/download.png"
     },
     "permissions": [
-        "activeTab",
-        "scripting"
-    ],
-    "action": {
-        "default_popup": "index.html"
-    }
+        "activeTab"
+    ]
 }

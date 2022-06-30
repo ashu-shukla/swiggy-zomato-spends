@@ -22,12 +22,13 @@ async function getAllInfoZomato() {
     totalPages = sections.totalPages;
     totalOrderCount = sections.count;
     orders = await getZomatoOrders(totalPages, totalOrderCount);
-    return { 'orders': orders[0], 'totalOrderCount': totalOrderCount, 'resList': orders[1] }
+    return { 'orders': orders[0], 'totalOrderCount': orders[0].length, 'resList': orders[1], 'errorList': orders[2], 'totalErrorOrders': orders[2].length }
 }
 
 async function getZomatoOrders(tpage, torders) {
-    var orderlist = [];
+    var orderList = [];
     var resList = [];
+    var errorOrderList = [];
     for (var i = 1; i <= tpage; i++) {
         const response = await fetch(`${zomato_orders_url}${i}`);
         var data = await response.json();
@@ -39,10 +40,15 @@ async function getZomatoOrders(tpage, torders) {
             order['totalCost'] = convertToNumber(obj['totalCost']);
             order['resName'] = obj.resInfo.name;
             order['orderTime'] = obj['orderDate']
-            orderlist.push(order);
+            order['orderStatus'] = obj.deliveryDetails['deliveryLabel']
             resList.push(obj.resInfo.name);
+            if (order['orderStatus'] == "Delivered") {
+                orderList.push(order);
+            } else {
+                errorOrderList.push(order);
+            }
         }
     }
-    return [orderlist, resList]
+    return [orderList, resList, errorOrderList]
 }
 

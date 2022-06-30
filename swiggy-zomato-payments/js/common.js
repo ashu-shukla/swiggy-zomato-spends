@@ -2,16 +2,24 @@
 let isSwiggy = false;
 let isZomato = false;
 
+// Order JSON
+var zomatoOrders = {};
+var swiggyOrders = {};
+
 // HTML elements for user prompts.
-const holdon = document.querySelector('#holdon')
-const wrongSite = document.querySelector('#wrongSite')
-const notLoggedin = document.querySelector('#notLoggedin')
-const loader = document.querySelector('#load')
-const zspend = document.querySelector('#zspend')
-const ztotal = document.querySelector('#ztotal')
-const zres = document.querySelector('#zres')
-const zhigh = document.querySelector('#zhigh')
-const zold = document.querySelector('#zold')
+const holdon = document.querySelector('#holdon');
+const wrongSite = document.querySelector('#wrongSite');
+const notLoggedin = document.querySelector('#notLoggedin');
+const loader = document.querySelector('#load');
+const zspend = document.querySelector('#zspend');
+const ztotal = document.querySelector('#ztotal');
+const zerror = document.querySelector('#zerror');
+const zplaced = document.querySelector('#zplaced');
+const zres = document.querySelector('#zres');
+const zhigh = document.querySelector('#zhigh');
+const zold = document.querySelector('#zold');
+const bob = document.querySelector('#bob').addEventListener('click', saveXLS);
+
 
 const active = document.getElementById("active");
 active.style.display = "none";
@@ -50,14 +58,15 @@ async function preloadFunc() {
 window.onpaint = preloadFunc();
 
 async function zomato() {
-    var zomatoOrders = {};
     if (isZomato) {
         loader.style.display = 'block'
         zomatoOrders = await getAllInfoZomato();
-        console.log(zomatoOrders);
+        // console.log(zomatoOrders);
         loader.style.display = 'none'
         active.style.display = "flex";
-        ztotal.innerHTML = zomatoOrders.totalOrderCount;
+        ztotal.innerHTML = zomatoOrders.totalOrderCount + zomatoOrders.totalErrorOrders;
+        zplaced.innerHTML = zomatoOrders.totalOrderCount;
+        zerror.innerHTML = zomatoOrders.totalErrorOrders;
         zspend.innerHTML = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(totalSpend(zomatoOrders.orders));
         var frequentRes = getMostFrequent(zomatoOrders.resList);
         zres.innerHTML = `${frequentRes[0]} - ${frequentRes[1]} orders.`;
@@ -65,18 +74,20 @@ async function zomato() {
         zhigh.innerHTML = `${convertToRupee(maxSpend.totalCost)} <br /> ${maxSpend.resName} <br /> ${convertDate(maxSpend.orderTime, true)}`;
         var oldest = zomatoOrders.orders[zomatoOrders.orders.length - 1];
         zold.innerHTML = `${convertToRupee(oldest.totalCost)} <br /> ${oldest.resName} <br /> ${convertDate(oldest.orderTime, true)}`;
+
     }
 }
 
 async function swiggy() {
-    var swiggyOrders = {};
     if (isSwiggy) {
         loader.style.display = 'block'
         swiggyOrders = await getSwiggyInfo();
-        console.log(swiggyOrders);
+        // console.log(swiggyOrders);
         loader.style.display = 'none'
         active.style.display = "flex";
-        ztotal.innerHTML = swiggyOrders.totalOrderCount;
+        ztotal.innerHTML = swiggyOrders.totalOrderCount + swiggyOrders.totalErrorOrders;
+        zplaced.innerHTML = swiggyOrders.totalOrderCount
+        zerror.innerHTML = swiggyOrders.totalErrorOrders;
         zspend.innerHTML = convertToRupee(totalSpend(swiggyOrders.orders));
         var frequentRes = getMostFrequent(swiggyOrders.resList);
         zres.innerHTML = `${frequentRes[0]} - ${frequentRes[1]} orders.`;
@@ -84,6 +95,7 @@ async function swiggy() {
         zhigh.innerHTML = `${convertToRupee(maxSpend.totalCost)} <br /> ${maxSpend.resName} <br /> ${convertDate(maxSpend.orderTime)}`;
         var oldest = swiggyOrders.orders[swiggyOrders.orders.length - 1];
         zold.innerHTML = `${convertToRupee(oldest.totalCost)} <br /> ${oldest.resName} <br /> ${convertDate(oldest.orderTime)}`;
+
 
     }
 }
@@ -128,4 +140,22 @@ function getMostFrequent(arr) {
     }, {})
     var res = Object.keys(hashmap).reduce((a, b) => hashmap[a] > hashmap[b] ? a : b)
     return [res, hashmap[res]]
+}
+
+function saveXLS() {
+    var orderList = {};
+    var errorList = {};
+    if (isSwiggy) {
+        orderList = swiggyOrders.orders;
+        errorList = swiggyOrders.errorList;
+    } else {
+        orderList = zomatoOrders.orders;
+        errorList = zomatoOrders.errorList;
+    }
+    const orderWorksheet = XLSX.utils.json_to_sheet(orderList);
+    const errorWorksheet = XLSX.utils.json_to_sheet(errorList);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, orderWorksheet, "Orders");
+    XLSX.utils.book_append_sheet(workbook, errorWorksheet, "Cancel-Refund-Error Orders");
+    XLSX.writeFile(workbook, "Order Summary.xlsx");
 }

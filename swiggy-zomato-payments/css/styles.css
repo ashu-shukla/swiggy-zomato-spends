@@ -1,5 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap');
+
+html {
+    border-top: 6px solid #EB5231;
+}
+
 body {
-    width: 320px;
+    font-family: 'Montserrat', sans-serif;
+    width: 620px;
+}
+
+a {
+    color: #EB5231;
+}
+
+#bob {
+    width: 40%;
+    font-size: medium;
+    border-radius: 5px;
+    background-color: #EB5231;
+}
+
+#bob:hover {
+    cursor: pointer;
+    color: #f3f3f3;
 }
 
 #active {

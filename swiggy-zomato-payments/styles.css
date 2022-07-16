@@ -1,0 +1,67 @@
+body {
+    width: 320px;
+}
+
+#active {
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.card {
+    width: 40%;
+    margin: 6px;
+    padding: 2px;
+    display: flex;
+    text-align: center;
+    border-radius: 5px;
+    background-color: rgba(203, 203, 203, 0.396);
+    align-content: space-around;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card span {
+    font-size: large;
+    font-weight: bold;
+    margin: 4px;
+}
+
+.card h3 {
+    margin: 2px;
+    font-weight: normal;
+}
+
+.loader {
+    border: 8px solid #f3f3f3;
+    /* Light grey */
+    border-top: 8px solid #3498db;
+    /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+button {
+    height: 30px;
+    width: 30px;
+    outline: none;
+    margin: 10px;
+    border: none;
+    border-radius: 2px;
+}
+
+button.current {
+    box-shadow: 0 0 0 2px white,
+        0 0 0 4px black;
+}

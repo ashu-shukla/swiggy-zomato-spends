@@ -123,7 +123,8 @@ function convertToRupee(number) {
 }
 
 function convertToNumber(str) {
-    var tnum = str.substring(1);
+    var nocoms = str.replace(/,/g, '');
+    var tnum = nocoms.substring(1);
     return parseFloat(tnum);
 }
 

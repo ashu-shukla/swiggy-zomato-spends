@@ -23,7 +23,8 @@ const bob = document.querySelector('#bob').addEventListener('click', saveXLS);
 
 const active = document.getElementById("active");
 active.style.display = "none";
-
+const swigInfo = document.querySelector('#swigInfo');
+swigInfo.style.display = "none";
 // Function to check if user is on Zomato or Swiggy and logged-in on extension open.
 async function preloadFunc() {
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -85,6 +86,7 @@ async function swiggy() {
         // console.log(swiggyOrders);
         loader.style.display = 'none'
         active.style.display = "flex";
+        swigInfo.style.display = "block";
         ztotal.innerHTML = swiggyOrders.totalOrderCount + swiggyOrders.totalErrorOrders;
         zplaced.innerHTML = swiggyOrders.totalOrderCount
         zerror.innerHTML = swiggyOrders.totalErrorOrders;

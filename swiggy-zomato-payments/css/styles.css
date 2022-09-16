@@ -13,6 +13,15 @@ a {
     color: #EB5231;
 }
 
+#swigInfo {
+    width: 93%;
+    margin: auto;
+    background-color: #ECF3FC;
+    padding: 14px;
+    border-radius: 5px;
+    color: #20508e;
+}
+
 #bob {
     width: 40%;
     font-size: medium;

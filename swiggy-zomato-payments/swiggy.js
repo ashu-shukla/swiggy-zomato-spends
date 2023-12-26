@@ -10,9 +10,15 @@ async function getSwiggyInfo() {
     var swiggyOrders = [];
     const response = await fetch(swiggy_orders_url);
     var data = await response.json();
-    var sections = data.data;
-    swiggyOrders = await SwiggyCustom(sections['orders']);
-    return { 'orders': swiggyOrders[0], 'totalOrderCount': swiggyOrders[0].length, 'resList': swiggyOrders[1] }
+    var sections = data?.data;
+    if (sections && sections.orders.length > 0) {
+      swiggyOrders = await SwiggyCustom(sections["orders"]);
+    }
+    return {
+      orders: swiggyOrders[0],
+      totalOrderCount: swiggyOrders[0].length,
+      resList: swiggyOrders[1],
+    };
 }
 
 async function SwiggyCustom(firstBatch) {
@@ -27,7 +33,7 @@ async function SwiggyCustom(firstBatch) {
         const response = await fetch(`${swiggy_orders_url}${lastOrder.orderId}`);
         var data = await response.json();
         var sections = data.data;
-        if (sections['orders'].length == 0) {
+        if (sections && sections.orders.length == 0) {
             flag = false;
             break;
         } else {

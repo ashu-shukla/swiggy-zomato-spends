@@ -29,7 +29,7 @@ async function SwiggyCustom(firstBatch) {
         const response = await fetch(`${swiggy_orders_url}${lastOrder.orderId}`);
         var data = await response.json();
         var sections = data.data;
-        if (sections['orders'].length == 0) {
+        if (!sections || sections.orders.length == 0) {
             flag = false;
             break;
         } else {

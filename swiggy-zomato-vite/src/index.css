@@ -1,0 +1,136 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap");
+
+:root {
+  font-family: "Montserrat", sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: rgb(11, 17, 32);
+  background-image: url("/images/hero-dark.jpg");
+  background-size: cover;
+  background-blend-mode: normal;
+  background-repeat: no-repeat;
+  width: 620px;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 8px;
+  background-image: url("/images/grid-dark.svg");
+  background-repeat: repeat;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+h1 {
+  line-height: 1.1;
+  font-size: 2.5em;
+  margin: 0;
+}
+
+p {
+  margin: 0px;
+  font-size: large;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 0.9rem;
+  border: 0.5px solid #0f172a0d;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  box-shadow: 0 20px 25px -5px #0000001a, 0 8px 10px -6px #0000001a, 0 0 #0000;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.alert {
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  margin: 10px auto;
+  padding: 0px 10px;
+  border: 1px solid rgb(250 204 20);
+}
+
+.card-container {
+  margin: 10px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 5px 8px;
+  background-color: rgb(30 41 59/1);
+  border-radius: 0.5rem;
+  border: 0.5px solid #0f172a0d;
+  box-shadow: 0 20px 25px -5px #0000001a, 0 8px 10px -6px #0000001a, 0 0 #0000;
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.card:hover {
+  transform: scale(1.011);
+  transition: transform 0.25s;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.my-2 {
+  margin: 1rem 0;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+    background-image: url("/images/hero.jpg");
+  }
+  body {
+    background-image: url("/images/grid.svg");
+    background-repeat: repeat;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+  .card {
+    background-color: rgb(255 255 255/1);
+  }
+}

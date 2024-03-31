@@ -1,0 +1,16 @@
+{
+    "manifest_version": 3,
+    "name": "Swiggy Zomato Spends",
+    "description": "You know you want to know how much you spent on food!",
+    "version": "0.1.0.1",
+    "icons": {
+        "128": "/images/download.png"
+    },
+    "action": {
+        "default_popup": "index.html",
+        "default_icon": "/images/download.png"
+    },
+    "permissions": [
+        "activeTab"
+    ]
+}
